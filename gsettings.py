@@ -124,6 +124,10 @@ def run_module():
         setting.set_value(key, new_value)
         result['changed'] = True
 
+    if state == 'reset' and setting.get_user_value(key) is not None:
+        setting.reset(key)
+        result['changed'] = True
+
     result['value'] = setting.get_value(key).unpack()
 
     # during the execution of the module, if there is an exception or a
